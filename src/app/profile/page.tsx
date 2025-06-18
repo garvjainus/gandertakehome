@@ -1,11 +1,11 @@
 'use client'
 
-import { Dashboard } from '@/components/dashboard'
-import { AuthForm } from '@/components/auth/auth-form'
 import { useAuth } from '@/contexts/auth-context'
-import { Plane, Loader2 } from 'lucide-react'
+import { PilotProfile } from '@/components/pilot/pilot-profile'
+import { AuthForm } from '@/components/auth/auth-form'
+import { Loader2, Plane } from 'lucide-react'
 
-export default function Home() {
+export default function ProfilePage() {
   const { user, loading } = useAuth()
 
   if (loading) {
@@ -24,5 +24,5 @@ export default function Home() {
     return <AuthForm />
   }
 
-  return <Dashboard />
-}
+  return <PilotProfile />
+} 
