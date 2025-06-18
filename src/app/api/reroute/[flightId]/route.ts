@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { fetchSigmets, getRadarTileUrl } from '@/lib/weatherService';
 import { lineString, booleanIntersects, union, bbox, buffer } from '@turf/turf';
@@ -29,7 +29,7 @@ const airportCoords: { [key: string]: [number, number] } = {
 };
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { flightId: string } }
 ) {
   const { flightId } = params;
