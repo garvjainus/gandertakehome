@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase'
-import { AuditLog, AuditLogWithUser, AuditLogFilters } from '@/types'
+import { AuditLogWithUser, AuditLogFilters } from '@/types'
 
 export class AuditService {
   /**

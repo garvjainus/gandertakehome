@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { DocMeta, DocAccessLog, DocUpload, DocComplianceStatus, DocFilterOptions, PilotProfile, Aircraft } from '@/types';
+import { DocMeta, DocAccessLog, DocUpload, DocComplianceStatus, DocFilterOptions } from '@/types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;

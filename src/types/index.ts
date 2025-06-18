@@ -250,8 +250,8 @@ export interface AuditLog {
   table_name: string;
   record_id: string;
   action: 'INSERT' | 'UPDATE' | 'DELETE';
-  old_data: any | null;
-  new_data: any | null;
+  old_data: Record<string, unknown> | null;
+  new_data: Record<string, unknown> | null;
   description?: string;
   performed_at: string; // ISO date string
   performed_by: string | null; // user id

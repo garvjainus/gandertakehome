@@ -14,9 +14,30 @@ interface Message {
   content: string;
   function_call?: {
     name: string;
-    result: any;
+    result: FunctionCallResult;
   };
   timestamp: Date;
+}
+
+interface FunctionCallResult {
+  legal?: boolean;
+  reason?: string;
+  aircraft_info?: {
+    model: string;
+    max_passengers: number;
+    max_range_nm: string;
+  };
+  conflicts?: Array<{
+    type: string;
+    message: string;
+  }>;
+  flight_info?: {
+    route: string;
+    aircraft: string;
+    captain: string;
+  };
+  results?: string[];
+  [key: string]: unknown;
 }
 
 const QuickActions = ({ onQuickAction }: { onQuickAction: (message: string) => void }) => {
@@ -66,7 +87,7 @@ const QuickActions = ({ onQuickAction }: { onQuickAction: (message: string) => v
   );
 };
 
-const FunctionCallDisplay = ({ functionCall }: { functionCall: any }) => {
+const FunctionCallDisplay = ({ functionCall }: { functionCall: { name: string; result: FunctionCallResult } }) => {
   const getIcon = (name: string) => {
     switch (name) {
       case 'check_aircraft_legality':
@@ -126,18 +147,18 @@ const FunctionCallDisplay = ({ functionCall }: { functionCall: any }) => {
           
           {functionCall.name === 'generate_loa_template' && (
             <div className="bg-white p-2 rounded border max-h-96 overflow-y-auto">
-              <pre className="text-xs whitespace-pre-wrap">{functionCall.result}</pre>
+              <pre className="text-xs whitespace-pre-wrap">{String(functionCall.result)}</pre>
             </div>
           )}
           
           {functionCall.name === 'check_flight_conflicts' && (
             <div>
-              {functionCall.result.conflicts.length === 0 ? (
+              {functionCall.result.conflicts && functionCall.result.conflicts.length === 0 ? (
                 <div className="text-green-600 font-medium">✅ No conflicts found</div>
               ) : (
                 <div>
-                  <div className="text-red-600 font-medium">⚠️ {functionCall.result.conflicts.length} conflict(s) found:</div>
-                  {functionCall.result.conflicts.map((conflict: any, index: number) => (
+                  <div className="text-red-600 font-medium">⚠️ {functionCall.result.conflicts?.length || 0} conflict(s) found:</div>
+                  {functionCall.result.conflicts?.map((conflict, index: number) => (
                     <div key={index} className="mt-1 p-2 bg-red-50 rounded">
                       <div className="font-medium text-red-800">{conflict.type}</div>
                       <div className="text-red-600 text-xs">{conflict.message}</div>
@@ -159,7 +180,7 @@ const FunctionCallDisplay = ({ functionCall }: { functionCall: any }) => {
             <div>
               <div className="font-medium mb-1">Regulatory Guidance:</div>
               <div className="max-h-48 overflow-y-auto">
-                {functionCall.result.results.map((result: string, index: number) => (
+                {functionCall.result.results?.map((result: string, index: number) => (
                   <div key={index} className="text-sm bg-blue-50 p-2 rounded mt-1">
                     {result}
                   </div>

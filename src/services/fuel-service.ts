@@ -4,9 +4,7 @@ import {
   FuelEventCreate, 
   FuelEfficiencySummary, 
   FlightFuelSummary, 
-  FuelFilterOptions,
-  Aircraft,
-  Flight
+  FuelFilterOptions
 } from '@/types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
