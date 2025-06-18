@@ -9,13 +9,10 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { 
   Filter, 
-  Search, 
-  Edit, 
+  Search,  
   Trash2, 
-  Fuel, 
-  DollarSign, 
+  Fuel,  
   MapPin, 
-  Clock,
   AlertTriangle,
   MoreHorizontal
 } from 'lucide-react';
@@ -34,7 +31,6 @@ interface FuelEventsListProps {
   flights: Flight[];
   filters: FuelFilterOptions;
   onFiltersChange: (filters: FuelFilterOptions) => void;
-  onEventUpdated: () => void;
   onEventDeleted: () => void;
 }
 
@@ -44,7 +40,6 @@ export function FuelEventsList({
   flights,
   filters,
   onFiltersChange,
-  onEventUpdated,
   onEventDeleted
 }: FuelEventsListProps) {
   const [loading, setLoading] = useState(false);

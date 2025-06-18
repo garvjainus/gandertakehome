@@ -9,14 +9,11 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { 
   Fuel, 
   Plus, 
-  TrendingUp, 
-  TrendingDown, 
+  TrendingUp,  
   DollarSign, 
   Gauge, 
   AlertTriangle,
-  BarChart3,
-  Filter,
-  Download
+  BarChart3
 } from 'lucide-react';
 import { FuelService } from '@/services/fuel-service';
 import { 
@@ -77,10 +74,6 @@ export function FuelTracker({ aircraft, flights }: FuelTrackerProps) {
 
   const handleEventCreated = () => {
     setShowEventForm(false);
-    setRefreshTrigger(prev => prev + 1);
-  };
-
-  const handleEventUpdated = () => {
     setRefreshTrigger(prev => prev + 1);
   };
 
@@ -247,7 +240,6 @@ export function FuelTracker({ aircraft, flights }: FuelTrackerProps) {
             flights={flights}
             filters={filters}
             onFiltersChange={setFilters}
-            onEventUpdated={handleEventUpdated}
             onEventDeleted={handleEventDeleted}
           />
         </TabsContent>
