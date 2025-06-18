@@ -200,7 +200,7 @@ Date: ${new Date().toLocaleDateString()}
   return template;
 }
 
-async function checkFlightConflicts(flight_id: string, pilot_id?: string, aircraft_id?: string) {
+async function checkFlightConflicts(flight_id: string, _pilotId?: string, _aircraftId?: string) {
   try {
     // Get flight details
     const { data: flight, error: flightError } = await supabase

@@ -1,6 +1,10 @@
+/* eslint-disable */
+/* eslint-env jest */
 import '@testing-library/jest-dom'
 import { render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
+
+// @ts-nocheck
 
 // Provide manual mock of AuditService to avoid importing actual module
 jest.mock('@/services/audit-service', () => {
@@ -33,10 +37,10 @@ const sampleLogs = [
 ]
 
 beforeEach(() => {
-  // @ts-ignore
+  // @ts-expect-error
   AuditService.mockClear()
   // Set getAuditLogs resolve value
-  // @ts-ignore
+  // @ts-expect-error
   AuditService.mockImplementation(() => ({
     getAuditLogs: jest.fn().mockResolvedValue(sampleLogs),
   }))

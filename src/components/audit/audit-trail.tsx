@@ -3,7 +3,6 @@ import { AuditService } from '@/services/audit-service'
 import { AuditLogWithUser } from '@/types'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Loader2 } from 'lucide-react'
 import { format } from 'date-fns'
@@ -130,19 +129,6 @@ export function AuditTrail() {
   )
 }
 
-function getActionVariant(action: string) {
-  switch (action) {
-    case 'INSERT':
-      return 'default' as const
-    case 'UPDATE':
-      return 'secondary' as const
-    case 'DELETE':
-      return 'destructive' as const
-    default:
-      return 'outline' as const
-  }
-}
-
 function getActionColor(action: string) {
   switch (action) {
     case 'INSERT':
@@ -166,7 +152,7 @@ function renderChanges(log: AuditLogWithUser) {
   // For UPDATE, show changed fields
   if (log.old_data && log.new_data) {
     const changedKeys = Object.keys(log.new_data).filter(
-      (key) => JSON.stringify((log.old_data as any)[key]) !== JSON.stringify((log.new_data as any)[key])
+      (key) => JSON.stringify((log.old_data as Record<string, unknown>)[key]) !== JSON.stringify((log.new_data as Record<string, unknown>)[key])
     )
     return (
       <span className="text-xs">
